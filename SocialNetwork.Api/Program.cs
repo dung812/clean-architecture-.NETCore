@@ -1,8 +1,11 @@
+using SocialNetwork.Api.Configurations.Filter;
 using SocialNetwork.Api.Configurations.Swagger;
 using SocialNetwork.Api.Configurations.Versioning;
 
 var builder = WebApplication.CreateBuilder(args);
 //builder.Host.AddAppConfigurations();
+builder.Services.AddControllerWithCustomFilter(); //Add controller and global filter
+
 
 builder.Services.AddCustomApiVersioning(); //Add versioning and custom config
 
