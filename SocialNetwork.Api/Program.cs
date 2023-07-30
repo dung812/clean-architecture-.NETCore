@@ -1,4 +1,13 @@
+using SocialNetwork.Api.Configurations.Swagger;
+using SocialNetwork.Api.Configurations.Versioning;
+
 var builder = WebApplication.CreateBuilder(args);
+//builder.Host.AddAppConfigurations();
+
+builder.Services.AddCustomApiVersioning(); //Add versioning and custom config
+
+builder.Services.AddSwaggerWithVersioning(); //Add Swagger to gen document with versioning
+
 
 // Add services to the container.
 
@@ -9,12 +18,11 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+if (!app.Environment.IsProduction())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUiWithVersioning(); //Use Swagger UI and some configs to make it work with versioning
 }
+
 
 app.UseHttpsRedirection();
 
